@@ -1,0 +1,104 @@
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column; /* Stack the container and footer */
+  min-height: 100vh; /* Ensure the body takes full height of the viewport */
+  background-color: #f4f4f4;
+}
+
+.container {
+  text-align: center;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px red;
+  width: 400px;
+  margin: 20px auto; /* Center container and give top/bottom margins */
+  flex-grow: 1; /* Allow the container to grow */
+}
+
+h1 {
+  color: #333;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#qrCodeContainer {
+  margin-top: 20px;
+}
+
+#qrCode {
+  max-width: 100%;
+  margin-top: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333;
+  color: white;
+  position: relative;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 8px 8px 10px red;
+}
+
+.footer-container p {
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.social-icons a {
+  text-decoration: none;
+}
+
+.social-icons img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+    box-shadow: 0 4px 10px red;
+
+}

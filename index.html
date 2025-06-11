@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="h1">QR Code Generator</h1>
+    <form id="qrForm">
+      <label for="url">Enter URL:-</label>
+      <input type="text" id="url" name="url" placeholder="https://example.com" required>
+      
+      <label for="filename">Enter Filename :-</label>
+      <input type="text" id="filename" name="filename" placeholder="qrcode_example" required>
+
+      <button type="submit">Generate QR Code</button>
+    </form>
+
+    <div id="qrCodeContainer">
+      <h2>Your QR Code:</h2>
+      <img id="qrCode" alt="QR Code will appear here" style="display:none;">
+      <!-- The download button will be added dynamically here -->
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-container">
+      <p>Connect with me:</p>
+      <div class="social-icons">
+        <a href="https://github.com/your-username" target="_blank">
+          <img src="https://img.icons8.com/ios/50/000000/github.png" alt="GitHub">
+        </a>
+        <a href="https://www.instagram.com/your-username" target="_blank">
+          <img src="https://img.icons8.com/ios/50/000000/instagram-new.png" alt="Instagram">
+        </a>
+        <a href="https://www.linkedin.com/in/your-username" target="_blank">
+          <img src="https://img.icons8.com/ios/50/000000/linkedin.png" alt="LinkedIn">
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
