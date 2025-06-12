@@ -39,7 +39,8 @@ body::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("https://i.postimg.cc/0jv27Qvw/20008380-645221846.jpg") center/cover no-repeat;
+  /* background: url("https://i.postimg.cc/0jv27Qvw/20008380-645221846.jpg") center/cover no-repeat; */
+  background: url('bg.jpg') center/cover no-repeat;
   z-index: -1;
 }
 
