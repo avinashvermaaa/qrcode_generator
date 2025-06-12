@@ -7,23 +7,28 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1 class="h1">QR Code Generator</h1>
+  <div class="wrapper">
     <form id="qrForm">
-      <label for="url">Enter URL:-</label>
-      <input type="text" id="url" name="url" placeholder="https://example.com" required>
-      
-      <label for="filename">Enter Filename :-</label>
-      <input type="text" id="filename" name="filename" placeholder="qrcode_example" required>
+      <h2>QR Code Generator</h2>
+
+      <div class="input-field">
+        <input type="text" id="url" name="url"  required>
+        <label>Enter URL</label>
+      </div>
+
+      <div class="input-field">
+        <input type="text" id="filename" name="filename"  required>
+        <label>Enter Filename</label>
+      </div>
 
       <button type="submit">Generate QR Code</button>
-    </form>
 
-    <div id="qrCodeContainer">
-      <h2>Your QR Code:</h2>
-      <img id="qrCode" alt="QR Code will appear here" style="display:none;">
-      <!-- The download button will be added dynamically here -->
-    </div>
+      <div id="qrCodeContainer" style="display: none;">
+        <h3>Your QR Code:</h3>
+        <img id="qrCode" alt="QR Code will appear here" style="max-width: 100%; margin-top: 20px;">
+        <button id="downloadBtn">Download QR Code</button>
+      </div>
+    </form>
   </div>
 
   <!-- Footer Section -->
@@ -37,7 +42,7 @@
         <a href="https://www.instagram.com/avinash_vermaa/" target="_blank">
           <img src="https://img.icons8.com/ios/50/000000/instagram-new.png" alt="Instagram">
         </a>
-        <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/ target="_blank">
+        <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/" target="_blank">
           <img src="https://img.icons8.com/ios/50/000000/linkedin.png" alt="LinkedIn">
         </a>
       </div>
