@@ -1,38 +1,118 @@
-document.getElementById('qrForm').addEventListener('submit', function (event) {
-  event.preventDefault();
+// ── Element References ──────────────────────────────────────────
+const form        = document.getElementById("qrForm");
+const urlInput    = document.getElementById("url");
+const nameInput   = document.getElementById("filename");
+const qrResult    = document.getElementById("qrResult");
+const qrCanvas    = document.getElementById("qrCanvas");
+const downloadBtn = document.getElementById("downloadBtn");
+const generateBtn = form.querySelector(".btn-generate");
+const btnText     = generateBtn.querySelector(".btn-text");
+const btnIcon     = generateBtn.querySelector(".btn-icon");
 
-  const url = document.getElementById('url').value;
-  const filename = document.getElementById('filename').value;
+// ── Validation ──────────────────────────────────────────────────
+function isValidURL(str) {
+  try {
+    new URL(str);
+    return true;
+  } catch {
+    return false;
+  }
+}
 
-  // Validate input
-  if (!url) {
-    alert('Please enter a URL.');
-    return;
+function setError(inputEl, hasError) {
+  const group = inputEl.closest(".input-group");
+  if (hasError) {
+    group.classList.add("error");
+  } else {
+    group.classList.remove("error");
+  }
+}
+
+function validateInputs(url, filename) {
+  let valid = true;
+
+  if (!url || !isValidURL(url)) {
+    setError(urlInput, true);
+    valid = false;
+  } else {
+    setError(urlInput, false);
   }
 
-  // Generate QR code using the qrcode library
-  QRCode.toDataURL(url, { errorCorrectionLevel: 'H' }, function (err, qrCodeDataURL) {
-    if (err) {
-      console.error(err);
-      alert('There was an error generating the QR code.');
-      return;
-    }
+  if (!filename) {
+    setError(nameInput, true);
+    valid = false;
+  } else {
+    setError(nameInput, false);
+  }
 
-    // Display QR code
-    const qrImage = document.getElementById('qrCode');
-    qrImage.style.display = 'block';
-    qrImage.src = qrCodeDataURL;
+  return valid;
+}
 
-    // Show the download button
-    const downloadContainer = document.getElementById('qrCodeContainer');
-    downloadContainer.style.display = 'block';
+// ── Clear errors on input ───────────────────────────────────────
+urlInput.addEventListener("input", () => setError(urlInput, false));
+nameInput.addEventListener("input", () => setError(nameInput, false));
 
-    // Create the "Download QR Code" button click event
-    document.getElementById('downloadBtn').addEventListener('click', function () {
-      const downloadLink = document.createElement('a');
-      downloadLink.href = qrCodeDataURL;
-      downloadLink.download = filename ? `${filename}.png` : 'qr_code.png';
-      downloadLink.click(); // Automatically triggers the download
-    });
+// ── Loading State ───────────────────────────────────────────────
+function setLoading(isLoading) {
+  if (isLoading) {
+    btnText.textContent = "Generating…";
+    btnIcon.className = "fa-solid fa-spinner fa-spin btn-icon";
+    generateBtn.disabled = true;
+  } else {
+    btnText.textContent = "Generate QR Code";
+    btnIcon.className = "fa-solid fa-bolt btn-icon";
+    generateBtn.disabled = false;
+  }
+}
+
+// ── QR Code Generation ──────────────────────────────────────────
+async function generateQRCode(url) {
+  await QRCode.toCanvas(qrCanvas, url, {
+    width: 240,
+    margin: 2,
+    color: {
+      dark: "#0d0d14",
+      light: "#ffffff",
+    },
   });
+}
+
+// ── Show Result ─────────────────────────────────────────────────
+function showResult() {
+  qrResult.classList.remove("hidden");
+  qrResult.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
+
+// ── Download Handler ────────────────────────────────────────────
+function handleDownload() {
+  const filename = nameInput.value.trim() || "qrcode";
+  const link = document.createElement("a");
+  link.href = qrCanvas.toDataURL("image/png");
+  link.download = `${filename}.png`;
+  link.click();
+}
+
+// ── Form Submit ─────────────────────────────────────────────────
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const url      = urlInput.value.trim();
+  const filename = nameInput.value.trim();
+
+  if (!validateInputs(url, filename)) return;
+
+  setLoading(true);
+
+  try {
+    await generateQRCode(url);
+    showResult();
+  } catch (err) {
+    console.error("QR generation failed:", err);
+    alert("Something went wrong generating the QR code. Please try again.");
+  } finally {
+    setLoading(false);
+  }
 });
+
+// ── Download Button ─────────────────────────────────────────────
+downloadBtn.addEventListener("click", handleDownload);

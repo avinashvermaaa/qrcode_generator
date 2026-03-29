@@ -1,51 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>QR Code Generator</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-  <div class="wrapper">
-    <form id="qrForm">
-      <h2>QR Code Generator</h2>
 
-      <div class="input-field">
-        <input type="text" id="url" name="url"  required>
-        <label>Enter URL</label>
+  <!-- Animated background blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <main class="container">
+    <div class="card">
+      <div class="card-header">
+        <div class="icon-wrap">
+          <i class="fa-solid fa-qrcode"></i>
+        </div>
+        <h1>QR Generator</h1>
+        <p class="subtitle">Turn any Link into a scannable QR code instantly</p>
       </div>
 
-      <div class="input-field">
-        <input type="text" id="filename" name="filename"  required>
-        <label>Enter Filename</label>
+      <form id="qrForm" novalidate>
+        <div class="input-group">
+          <span class="input-icon"><i class="fa-solid fa-link"></i></span>
+          <input type="url" id="url" placeholder="https://example.com" required autocomplete="off"/>
+          <label for="url">Enter URL</label>
+        </div>
+
+        <div class="input-group">
+          <span class="input-icon"><i class="fa-solid fa-file-signature"></i></span>
+          <input type="text" id="filename" placeholder="my-qrcode" required autocomplete="off"/>
+          <label for="filename">File Name</label>
+        </div>
+
+        <button type="submit" class="btn-generate">
+          <span class="btn-text">Generate QR Code</span>
+          <i class="fa-solid fa-bolt btn-icon"></i>
+        </button>
+      </form>
+
+      <div id="qrResult" class="qr-result hidden">
+        <div class="divider"><span>Your QR Code</span></div>
+        <div class="qr-preview">
+          <canvas id="qrCanvas"></canvas>
+          <div class="qr-glow"></div>
+        </div>
+        <button id="downloadBtn" class="btn-download">
+          <i class="fa-solid fa-download"></i> Download PNG
+        </button>
       </div>
+    </div>
+  </main>
 
-      <button type="submit">Generate QR Code</button>
-
-      <div id="qrCodeContainer" style="display: none;">
-        <h3>Your QR Code:</h3>
-        <img id="qrCode" alt="QR Code will appear here" style="max-width: 100%; margin-top: 20px;">
-        <button id="downloadBtn">Download QR Code</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Footer Section -->
   <footer>
-    <div class="footer-container">
-      <p>Connect with me:</p>
-      <div class="social-icons">
-        <a href="https://github.com/avinashvermaaa" target="_blank">
-          <img src="https://img.icons8.com/ios/50/000000/github.png" alt="GitHub">
-        </a>
-        <a href="https://www.instagram.com/avinash_vermaa/" target="_blank">
-          <img src="https://img.icons8.com/ios/50/000000/instagram-new.png" alt="Instagram">
-        </a>
-        <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/" target="_blank">
-          <img src="https://img.icons8.com/ios/50/000000/linkedin.png" alt="LinkedIn">
-        </a>
-      </div>
+    <p>Built by <strong>Avinash Verma</strong> &mdash; connect with me</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/avinash_vermaa/" target="_blank" aria-label="Instagram">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/" target="_blank" aria-label="LinkedIn">
+        <i class="fa-brands fa-linkedin-in"></i>
+      </a>
     </div>
   </footer>
 
