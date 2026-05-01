@@ -1,3 +1,3 @@
 # QR code generator
 
-## link :- https://avinashvermaaa.github.io/qrcode_generator/
+## link :- https://qrcodebaba.netlify.app
